@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Speed</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('MainPage_Img1.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .topbar {
+            width: 100%;
+            height: 100px;
+            background: url('Topbar.png') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 0 40px;
+            position: relative;
+            z-index: 100;
+        }
+        .logo {
+            height: 60px;
+        }
+        .right-content {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .play-on-text {
+            height: 15px; /* Adjust this value to change Play On text size */
+        }
+        .btn {
+            background: none;
+            border: none;
+            outline: none;
+            padding: 0;
+            margin-left: 10px;
+            cursor: pointer;
+            width: 150px;  /* Adjust this value to change button width */
+            height: 150px; /* Adjust this value to change button height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .btn img.default {
+            display: block;
+        }
+        .btn img.hover {
+            display: none;
+        }
+        .btn:hover img.default {
+            display: none;
+        }
+        .btn:hover img.hover {
+            display: block;
+        }
+        .background-blur {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            backdrop-filter: blur(8px);
+            transition: backdrop-filter 0.3s;
+        }
+        .background-blur.clear {
+            backdrop-filter: none;
+        }
+        .topbar, .topbar * {
+            position: relative;
+            z-index: 101;
+            filter: none !important;
+        }
+        .floating-blur-text {
+            position: absolute;
+            top: 120px;
+            right: 60px;
+            max-width: 600px;
+            color: #fff;
+            font-size: 2.1rem;
+            font-weight: bold;
+            text-align: right;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            font-family: inherit;
+            z-index: 10;
+            filter: blur(3px);
+            transition: filter 0.3s;
+            cursor: pointer;
+        }
+        .floating-blur-text.clear {
+            filter: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blur" id="bgBlur"></div>
+    <div class="topbar">
+        <img src="Word_Logo.png" alt="Logo" class="logo">
+        <div class="right-content">
+            <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                <img src="Play_On_Text.png" alt="Play On" class="play-on-text">
+            </div>
+            <a href="https://desktop.streetspeed.xyz" class="btn">
+                <img src="Desktop_Default_Btn.png" class="default" alt="Desktop Button">
+                <img src="Desktop_Hover_Btn.png" class="hover" alt="Desktop Button Hover">
+            </a>
+            <a href="https://mobile.streetspeed.xyz" class="btn">
+                <img src="Mobile_Default_Btn.png" class="default" alt="Mobile Button">
+                <img src="Mobile_Hover_Btn.png" class="hover" alt="Mobile Button Hover">
+            </a>
+        </div>
+    </div>
+    <div class="floating-blur-text" id="floatingText" tabindex="0">
+        Street Speed is a skill based betting car racing game built on Taiko
+    </div>
+    <script>
+        const bgBlur = document.getElementById('bgBlur');
+        const floatingText = document.getElementById('floatingText');
+        function setClear(clear) {
+            if(clear) {
+                bgBlur.classList.add('clear');
+                floatingText.classList.add('clear');
+            } else {
+                bgBlur.classList.remove('clear');
+                floatingText.classList.remove('clear');
+            }
+        }
+        floatingText.addEventListener('mouseenter', () => setClear(true));
+        floatingText.addEventListener('mouseleave', () => setClear(false));
+        floatingText.addEventListener('focus', () => setClear(true));
+        floatingText.addEventListener('blur', () => setClear(false));
+    </script>
+</body>
+</html>
